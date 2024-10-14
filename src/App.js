@@ -34,24 +34,26 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Selecciona una Tabla</h1>
-      <select onChange={(e) => handleTableSelect(e.target.value)}>
-        <option value="">Seleccionar tabla</option>
-        {tables.map((table, index) => (
-          <option key={index} value={table}>{table}</option>
-        ))}
-      </select>
+    <div className="App">
+      <header className="App-header">
+        <h1>Tablas Disponibles</h1>
+        <select className="select-table" onChange={(e) => handleTableSelect(e.target.value)}>
+          <option value="">Seleccionar tabla</option>
+          {tables.map((table, index) => (
+            <option key={index} value={table}>{table}</option>
+          ))}
+        </select>
+      </header>
 
       {selectedTable && (
-        <div>
+        <div className="table-container">
           <h2>Datos de {selectedTable}</h2>
-          {tableData.length > 0 ? ( // Verificar si hay datos para mostrar
-            <table>
+          {tableData.length > 0 ? (
+            <table className="styled-table">
               <thead>
                 <tr>
                   {Object.keys(tableData[0]).map((key, index) => (
-                    <th key={index}>{key}</th> // Encabezados basados en las claves de los datos
+                    <th key={index}>{key}</th>
                   ))}
                 </tr>
               </thead>
@@ -59,14 +61,14 @@ function App() {
                 {tableData.map((row, rowIndex) => (
                   <tr key={rowIndex}>
                     {Object.values(row).map((value, valueIndex) => (
-                      <td key={valueIndex}>{value}</td> // Valores basados en los valores de cada fila
+                      <td key={valueIndex}>{value}</td>
                     ))}
                   </tr>
                 ))}
               </tbody>
             </table>
           ) : (
-            <p>No hay datos disponibles para esta tabla.</p> // Mensaje si no hay datos
+            <p>No hay datos disponibles.</p>
           )}
         </div>
       )}
